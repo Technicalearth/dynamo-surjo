@@ -1,0 +1,17 @@
+label{
+    text-align: center;
+    cursor: text;
+}
+body{
+    text-align: center;
+}
+ul li a{
+    text-decoration: none;
+    text-decoration: black;
+}
+ul li{
+    list-style: none;
+}
+footer{
+    background-color: cyan;
+}

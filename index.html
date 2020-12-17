@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>dynamo surjo gaming</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/home/css/index.css">
+
+
+
+    <link rel="stylesheet" href="/static/home/css/navbar.css">
+    <link rel="icon" type="image/png" href="/static/home/img/favicon.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60726752-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-60726752-3');
+    </script>
+
+    <!-- Google Ads Auto -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9655830461045889",
+            enable_page_level_ads: true
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading"><span id="typed"></span></h1>
+        </div>
+    </section>
+
+    <label>Hello guys, my name is surjo. here you can play many games. the links are below.</label>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <hr>
+
+    <ul>
+        <li><a href="happy.html">Happy wheels</a></li>
+        <li><a href="burger.html">When burger attacks</a></li>
+        <li><a href="free.html">Papa's freezeria</a></li>
+    </ul>
+
+    <hr>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <footer>copyright all right reserved. 2020 - </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="https://apis.google.com/js/platform.js" defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/433888fe69.js" crossorigin="anonymous" defer></script>
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        let otpbtn = document.getElementById('otpbtn');
+        if (otpbtn != undefined) {
+            otpbtn.addEventListener('click', (e) => {
+                otpbtn.innerText = 'Sending...';
+                e.preventDefault();
+                if (!otpbtn.classList.contains('disabled')) {
+                    otpbtn.classList.add('disabled');
+                    otpbtn.disabled = true;
+                    csrf_token = getCookie('csrftoken');
+                    let formData = new FormData();
+                    formData.append('email', document.getElementById('email').value);
+                    formData.append('csrfmiddlewaretoken', csrf_token);
+                    fetch('/utils/sendotp', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log(data);
+                            if (data.startsWith("Error")) {
+                                otpMessage.classList.add('text-danger');
+                                otpbtn.innerText = 'Error';
+                            }
+                            else {
+                                otpMessage.classList.add('text-success');
+                                otpbtn.innerText = 'OTP Sent';
+                            }
+                            otpMessage.innerText = data;
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
+                }
+                else {
+                    // Otp has already been sent
+                }
+
+            });
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js" async defer></script>
+    <script>
+        window.onload = function () {
+            console.log("loaded")
+            var typed = new Typed('#typed', {
+                strings: ["Welcome to Dynamo surjo gaming :)", "play Happy wheels", "papa's freezeria", "When burger attacks"],
+                backSpeed: 15,
+                smartBackspace: true,
+                backDelay: 1200,
+                startDelay: 1000,
+                typeSpeed: 25,
+                loop: true,
+            });
+        };
+    </script>
+
+</body>
+
+</html>
